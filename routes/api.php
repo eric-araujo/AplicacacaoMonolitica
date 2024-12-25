@@ -27,9 +27,7 @@ Route::post('/login', function (Request $request) {
         return response()->json('Unauthorized', 401);
     }
 
-    /**
-     * @var \App\Models\User $user;
-     */
+    /** @var \App\Models\User $user */
     $user = Auth::user();
     $token = $user->createToken('login');
 
@@ -44,3 +42,5 @@ Route::middleware('auth:sanctum')->group(function () {
 
 Route::get('/test', fn() => 'Ok')
     ->withoutMiddleware(ThrottleRequests::class . ':api');
+
+Route::get('/status', fn() => fpm_get_status());

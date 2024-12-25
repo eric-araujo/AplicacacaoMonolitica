@@ -3,9 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreSpecialistRequest;
-use App\Jobs\GenerateReport;
+use App\Jobs\GenerateReportJob;
 use App\Models\Specialist;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 
 class SpecialistController extends Controller
 {
@@ -54,7 +57,7 @@ class SpecialistController extends Controller
 
     public function highestRated(int $limit = 10)
     {
-        GenerateReport::dispatch(Auth::user()->email);
+        GenerateReportJob::dispatch(Auth::user()->email);
 
         return response()->noContent();
     }

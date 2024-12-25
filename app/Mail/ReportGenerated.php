@@ -13,7 +13,9 @@ class ReportGenerated extends Mailable
 {
     use Queueable, SerializesModels;
 
-    public function __construct(private string $url) {}
+    public function __construct(private string $url)
+    {
+    }
 
     public function envelope(): Envelope
     {
@@ -32,6 +34,11 @@ class ReportGenerated extends Mailable
         );
     }
 
+    /**
+     * Get the attachments for the message.
+     *
+     * @return array<int, \Illuminate\Mail\Mailables\Attachment>
+     */
     public function attachments(): array
     {
         return [];
